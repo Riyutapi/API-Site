@@ -1,0 +1,86 @@
+<p class="titulo1">Esta é a área dos Departamentos.<br />Espero que tudo seja intuitivo para você.</p>
+
+<div>
+    <!-- Botão para abrir o modal de criação de novo departamento -->
+    <button class="novo" type="button" (click)="abrirModal()"><b>Novo Departamento</b></button>
+    <p class="text1">Procurar Departamento</p>
+    <div class="retangulo">
+        <!-- Campo de busca para filtrar departamentos -->
+        <input type="text" class="input-Buscar" placeholder="Buscar" (input)="search($event)">
+    </div>
+</div>
+
+<!-- Modal para criação/editação de Departamento -->
+<div class="overlay" *ngIf="showModal">
+    <div class="modal">
+        <!-- Formulário para novo Departamento -->
+        <form [formGroup]="novoDepartamentoForm" (ngSubmit)="submit()" #FormDit="ngForm">
+            <div class="input_box">   
+                <label for="nome">Nome: </label>
+                <input type="text" formControlName="nome" required/>
+            </div>
+            <div class="input_box_sigla">   
+                <label for="sigla">Sigla: </label>
+                <input type="text" formControlName="sigla" required/>
+            </div>
+            <div class="botoes">
+                <!-- Botões para adicionar ou cancelar a operação -->
+                <button class="adicionar" type="submit" [disabled]="!novoDepartamentoForm.valid">{{ modalButtonText }}</button>
+                <button class="cancelar" type="button" (click)="fecharModal()">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal de confirmação para exclusão de Departamento -->
+<div class="overlay" *ngIf="showModalExclusao">
+    <div class="modal">
+        <p class="text2">Você tem certeza que deseja excluir esse departamento?</p>
+        <p class="text">(Todos os funcionários desse departamento também serão excluídos)</p>
+        <!-- Informações do Departamento selecionado para exclusão -->
+        <p style="word-break: break-all;">Nome: {{ departamentoSelecionadoExclusao?.nome }}</p>
+        <p style="word-break: break-all;">Sigla: {{ departamentoSelecionadoExclusao?.sigla }}</p>
+        <div class="botoes">
+            <!-- Botões para confirmar ou cancelar a exclusão -->
+            <button class="excluir2" (click)="submitExclusao()">Excluir</button>
+            <button class="repensar" (click)="fecharModalExclusao()">Repensar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Tabela para exibir os Departamentos -->
+<table class="retanguloG">
+    <!-- Cabeçalho-->
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Sigla</th>
+            <th class="incolor"></th>
+            <th class="incolor"></th>
+            <th class="incolor"></th>
+            <th class="incolor"></th>
+        </tr>
+    </thead>
+    <!-- Corpo-->
+    <tbody *ngFor="let departamento of departamentos">
+        <tr>
+            <td>{{ departamento.id }}</td>
+            <td>{{ departamento.nome }}</td>
+            <td>{{ departamento.sigla }}</td>
+            <td class="incolor">
+                <!-- Botão para editar o Departamento -->
+                <button class="editar" (click)="abrirModal(true, departamento.id)">Editar</button>
+            </td>
+            <td class="incolor">
+                <!-- Botão para abrir o modal de exclusão do Departamento -->
+                <button class="excluir1" (click)="abrirModalExclusao(departamento)">Excluir</button>
+            </td>
+            <td class="incolor"></td>
+            <td class="incolor">
+                <!-- Link para navegar para a página de Funcionários do Departamento -->
+                <a href="/funcionarios/{{ departamento.nome.split(' ').join('') }}"><button class="avancar">Funcionários</button></a>
+            </td>
+        </tr>
+    </tbody>
+</table>

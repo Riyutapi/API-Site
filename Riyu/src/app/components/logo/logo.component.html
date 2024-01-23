@@ -1,0 +1,8 @@
+<!-- Ir para tela inicial do site usando a imagem do símbolo da empresa -->
+<div>
+    <a href=""><img src="assets/logo.png" alt="Logo"></a>
+
+    <!-- Voltar -->
+    <a *ngIf="urlAtual !== '' && urlAtual !== '/'" href="" (click)="voltar(); 
+        $event.preventDefault()"><img class="voltar" src="assets/voltar.png" alt="Voltar"></a>
+</div>

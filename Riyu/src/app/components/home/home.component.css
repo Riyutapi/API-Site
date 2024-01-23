@@ -1,0 +1,76 @@
+/* Centralizar o "button" horizontalmente */
+.button-centro {
+    text-align: center;
+}
+
+button {
+    /* Cor do "button" */
+    background-color: #8C44EB;
+    /* Cor do texto */
+    color: white;
+    /* Tamanho da fonte do texto */
+    font-size: 20px;
+    /* Tamanho do "button" */
+    width: 300px;
+    height: 80px;
+    /* Arredondar as quinas */
+    border-radius: 20px;
+    /* Mudar a aparência do cursor do mouse */
+    cursor: pointer;
+    /* Colocar uma borda preta em volta */
+    border: 2px solid #000;
+    /* Colocar um sombreado */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Aumentar o tamanho do "button" quando passar mouse em cima */
+button:hover {
+    transform: scale(1.01);
+}
+
+/* Fonte e centralizar textos */
+.titulo, .text {
+    font-style: inherit;
+    text-align: center;
+}
+
+/* Tamanho da fonte e posição do texto maior */
+.titulo {
+    font-size: 128%;
+    margin-top: -82px;
+}
+
+/* Tamanho da fonte e posição do texto menor */
+.text {
+    font-size: 118%;
+    margin-top: 30px;
+}
+
+/* Tamanho e posição da imagem */
+img {
+    max-width: 19%;
+    min-width: 100px;
+    /* Mantém a proporção da imagem */
+    height: auto;
+    display: block;
+    margin: auto;
+}
+
+/* Adicionando regras de media query para tornar o layout mais responsivo */
+@media (max-width: 600px) {
+    button {
+        width: 40%; /* Tornar o botão ocupando a largura total em telas menores */
+        font-size: 15px;
+        height: auto; /* Altura automática para ajustar o conteúdo */
+    }
+
+    .titulo {
+        font-size: 50%; /* Tamanho da fonte */
+        margin-top: -40px; /* Posição */
+    }
+
+    .text {
+        font-size: 45%; /* Tamanho da fonte */
+        margin-top: 5%; /* Posição */
+    }
+}

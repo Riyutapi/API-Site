@@ -1,0 +1,21 @@
+img {
+    /* Define posição relativa para a imagem */
+    position: relative;
+    /* Espaço entre a página e a imagem */
+    left: 11%;
+}
+
+.voltar {
+    /* Espaço entre a página e a imagem */
+    left: 77%;
+     /* Desloca o botão "Voltar" para cima */
+    top: -18px;
+}
+
+/* Adicionando regras de media query para telas menores que 600px */
+@media (max-width: 600px) {
+    img, .voltar {
+        left: 10px; /* Ajusta a posição das imagens para telas menores */
+        max-height: 50px; /* Limita a altura máxima das imagens */
+    }
+}

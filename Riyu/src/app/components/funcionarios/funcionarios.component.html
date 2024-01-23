@@ -1,0 +1,94 @@
+<p class="titulo1">Esta é a área dos Funcionários.</p>
+
+<div>
+    <!-- Botão para abrir o modal de criação de novo funcionário -->
+    <button class="novo" type="button" (click)="abrirModal()"><b>Novo Funcionário</b></button>
+    <p class="text1">Procurar Funcionário</p>
+    <div class="retangulo">
+        <!-- Campo de busca para filtrar funcionários -->
+        <input type="text" class="input-Buscar" placeholder="Buscar" (input)="search($event)">
+    </div>
+</div>
+
+<!-- Modal de criação/edição de funcionário -->
+<div class="overlay" *ngIf="showModal">
+    <div class="modal">
+        <form [formGroup]="novoFuncionarioForm" (ngSubmit)="submit()" #FormDit="ngForm" enctype="multipart/form-data">
+            <!-- Input para o nome do funcionário -->
+            <div class="input_box">   
+                <label for="nome">Nome: </label>
+                <input type="text" formControlName="nome" required/>
+            </div>
+
+            <!-- Input para o RG do funcionário -->
+            <div class="input_box_rg">   
+                <label for="rg">RG: </label>
+                <input type="text" formControlName="rg" required/>
+            </div>
+
+            <!-- Input para adicionar a foto do funcionário -->
+            <div class="input_box_foto" [class.with-file]="hasFile">
+                <label for="foto" class="custom-file-upload">
+                    <img *ngIf="fotoPreviewUrl" [src]="fotoPreviewUrl" alt="Preview" class="foto-preview">
+                    <span *ngIf="!fotoPreviewUrl">Adicionar Foto</span>
+                </label>
+                <input type="file" name="foto" id="foto" (change)="onFileSelected($event)" style="display:none;" #fotoInput />
+            </div>
+
+            <!-- Botões de ação no modal -->
+            <div class="botoes">
+                <button class="adicionar" type="submit" [disabled]="!novoFuncionarioForm.valid">{{ modalButtonText }}</button>
+                <button class="cancelar" type="button" (click)="fecharModal()">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal de confirmação de exclusão -->
+<div class="overlay" *ngIf="showModalExclusao">
+    <div class="modal">
+        <p class="text2">Você tem certeza que deseja excluir esse funcionario?</p>
+        <p style="word-break: break-all;">Nome: {{ funcionarioSelecionadoExclusao?.nome }}</p>
+        <p style="word-break: break-all;">Sigla: {{ funcionarioSelecionadoExclusao?.rg }}</p>
+        <div class="botoes">
+            <button class="excluir2" (click)="submitExclusao()">Excluir</button>
+            <button class="repensar" (click)="fecharModalExclusao()">Repensar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Tabela de exibição dos funcionários -->
+<table class="retanguloG">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Foto</th>
+            <th>RG</th>
+            <th class ="incolor"></th>
+            <th class ="incolor"></th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let funcionario of funcionarios">
+        <tr>
+            <!-- Exibição dos detalhes do funcionário na tabela -->
+            <td>{{ funcionario.id }}</td>
+            <td>{{ funcionario.nome }}</td>
+            <td>
+                <!-- Verificação se há foto do funcionário -->
+                <ng-container *ngIf="funcionario.foto; else semFoto">
+                    <img [src]="buscarImagem(funcionario.foto)">
+                </ng-container>
+                <ng-template #semFoto>Sem foto</ng-template>
+            </td>
+            <td>{{ funcionario.rg }}</td>
+            <!-- Botões de edição e exclusão na tabela -->
+            <td class="incolor">
+                <button class="editar" (click)="abrirModal(true, funcionario.id)">Editar</button>
+            </td>
+            <td class="incolor">
+                <button class="excluir1" (click)="abrirModalExclusao(funcionario)">Excluir</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

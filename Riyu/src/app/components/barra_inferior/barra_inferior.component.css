@@ -1,0 +1,81 @@
+/* Margem inferior do site */
+.vazio {
+    margin-bottom: 5%;
+}
+
+.rodape {
+    /* Cor de fundo */
+    background-color: #4569EB;
+    /* Espaço ocupado */
+    width: 100%;
+    height: 9%;
+
+    /* Posicionar o rodapé no final da tela */
+    position: fixed;
+    bottom: 0;
+
+    /* Impedir a quebra de linha dos textos */
+    white-space: nowrap;
+
+    /* Alinhar as imagens com o texto e ao centro */
+    display: flex;
+    align-items: center;
+
+    /* Distribuir o espaço igualmente entre os elementos */
+    justify-content: space-between;
+
+    /* Alinhar à esquerda */
+    left: 0;
+    /* Garantir que o rodapé fique em cima de qualquer conteúdo do site (se tiver menos de 10 sobreposições) */
+    z-index: 10;
+}
+
+.text {
+    /* Cor do texto */
+    color: #000;
+    /* Adicionar margem à esquerda para espaçamento com a borda esquerda da página */
+    margin-left: 11%;
+}
+
+/* Tag para criar espaçamento entre os textos */
+.text span {
+    margin-right: 9%;
+}
+
+/* Espaçamento entre as imagens */
+.github {
+    margin-right: 13%;
+}
+.linkdin{
+    margin-left: 35%;
+}
+
+/* Adicionando regras de media query para telas menores que 600px */
+@media (max-width: 600px) {
+    .rodape {
+        padding: 3%; /* preenchimento interno para melhor visualização */
+        width: 100%;
+        height: 0%;
+    }
+
+    .text {
+        margin-left: -1%; /* Remover a margem à esquerda para telas menores */
+        font-size: 99%; /* Diminuir um pouco a fonte */
+    }
+
+    /* Tag para criar espaçamento entre os textos */
+    .text span {
+        margin-right: 0; /* Remover a margem entre os spans */
+        display: block; /* Garantir que cada span apareça em uma linha separada */
+    }
+
+    /* Espaçamento entre as imagens */
+    .github {
+        margin-right: 15%;
+        margin-top: 1%;
+    }
+    .linkdin {
+        margin-left: 0;
+        margin-top: 1%; 
+    }
+}
